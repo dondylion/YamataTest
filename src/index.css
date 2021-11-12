@@ -11,3 +11,75 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.container {
+  font-size: 2rem;
+  margin: 0 auto;
+  width: 600px;
+  background-color: #f0ffff;
+}
+
+nav {
+  display: flex;
+  flex-direction: row;
+}
+
+.toggles {
+  width: 50%;
+  text-align: center;
+  padding: 1rem;
+  border: 3px solid #6d98e9;
+  background-color: #ffffff;
+}
+
+.login {
+  border-right: none;
+}
+
+.active {
+  background-color: #4081fa;
+  color: #ffffff;
+  text-shadow: 1px 1px 5px #000000;
+}
+
+form {
+  font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  text-align: center;
+  width: 300px;
+  height: 200px;
+  margin: 0 auto;
+  border: 3px solid #6d98e9;
+  padding: 20px;
+  background-color: #cbffff;
+  border-radius: 5px;
+}
+
+.loginform {
+  padding: 20px;
+}
+
+#submitsignup {
+  margin: 20px auto 0 auto;
+  padding: 5px;
+  font-size: 1rem;
+  color: #ffffff;
+  background-color: #4081fa;
+  border: 1px solid #6d98e9;
+  text-shadow: 1px 1px 5px #000000;
+}
+
+.input-text {
+  border: 1px solid #6d98e9;
+  width: 70%;
+  margin: 0 auto;
+  line-height: 1.5rem;
+}
+
+.information {
+  margin: 20px auto;
+  padding: 10px;
+  text-align: center;
+}
