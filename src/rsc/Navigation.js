@@ -24,15 +24,21 @@ class Navigation extends React.Component {
         xhrPost.send(message);
         xhrPost.onreadystatechange = () => {
             if (xhrPost.readyState === 4 && xhrPost.status === 200) {
-                userID = JSON.parse(xhrPost.responseText).data.id;
-                xhrGet.open("GET", "https://mysterious-reef-29460.herokuapp.com/api/v1/user-info/" + userID, true);
-                xhrGet.onreadystatechange = () => {
-                    if (xhrGet.readyState === 4 && xhrGet.status === 200) {
-                        this.setState({ active: 'profileActive' });
-                        this.setState({ profileData: JSON.parse(xhrGet.responseText)});
+                if (JSON.parse(xhrPost.responseText).status === 'ok') {
+                    userID = JSON.parse(xhrPost.responseText).data.id;
+                    xhrGet.open("GET", "https://mysterious-reef-29460.herokuapp.com/api/v1/user-info/" + userID, true);
+                    xhrGet.onreadystatechange = () => {
+                        if (xhrGet.readyState === 4 && xhrGet.status === 200) {
+                            this.setState({ active: 'profileActive' });
+                            this.setState({ profileData: JSON.parse(xhrGet.responseText)});
+                        }
                     }
+                    xhrGet.send(); 
+                } else {
+                    password.value = '';
+                    alert('Имя пользователя или пароль введены неверно');
                 }
-                xhrGet.send(); 
+                
             }
         };
     }
