@@ -5,7 +5,35 @@ class Navigation extends React.Component {
     constructor () {
         super ();
         this.state = { 
-            active: 'loginActive'
+            active: 'loginActive',
+            profileData: {}
+        };
+    }
+
+    submitForm () {
+        const userName = document.getElementById('usernamesignup'),
+            password = document.getElementById('passwordsignup');
+    
+        let message = "email=" + encodeURIComponent(userName.value) + "&password=" + encodeURIComponent(password.value),
+            xhrPost = new XMLHttpRequest(),
+            xhrGet = new XMLHttpRequest(),
+            userID = '';
+    
+        xhrPost.open("POST", "https://mysterious-reef-29460.herokuapp.com/api/v1/validate", true);
+        xhrPost.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhrPost.send(message);
+        xhrPost.onreadystatechange = () => {
+            if (xhrPost.readyState === 4 && xhrPost.status === 200) {
+                userID = JSON.parse(xhrPost.responseText).data.id;
+                xhrGet.open("GET", "https://mysterious-reef-29460.herokuapp.com/api/v1/user-info/" + userID, true);
+                xhrGet.onreadystatechange = () => {
+                    if (xhrGet.readyState === 4 && xhrGet.status === 200) {
+                        this.setState({ active: 'profileActive' });
+                        this.setState({ profileData: JSON.parse(xhrGet.responseText)});
+                    }
+                }
+                xhrGet.send(); 
+            }
         };
     }
 
@@ -32,7 +60,7 @@ class Navigation extends React.Component {
                     <div className="login toggles active" onClick={this.isActive.bind(this)}>Войти</div>
                     <div className="profile toggles" onClick={this.isActive.bind(this)}>Профиль</div>
                 </nav>
-                <Sheet isActive={this.state.active} />
+                <Sheet isActive={this.state.active} subForm={()=>{this.submitForm()}} profileData={this.state.profileData}/>
             </div>
         );
     }

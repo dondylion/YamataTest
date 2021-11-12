@@ -80,6 +80,8 @@ form {
 
 .information {
   margin: 20px auto;
-  padding: 10px;
+  padding: 10px 50px 10px 50px;
   text-align: center;
+  font-size: 1rem;
+  text-align: left;
 }
